@@ -1,0 +1,14 @@
+buildNumber: ${buildNumber}
+buildTime: ${buildTime}
+gitRevision: ${gitRevision}
+gitBranch: ${gitBranch}
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:13308/ecommerce_inventory_mysql?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useServerPrepStmts=false&rewriteBatchedStatements=true
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
+logging:
+  file: /var/log/ecommerce-inventory-backend/inventory-qa.log
