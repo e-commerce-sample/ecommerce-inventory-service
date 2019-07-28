@@ -8,7 +8,7 @@ class InventoryTest {
 
     @Test
     public void should_create_inventory() {
-        assertNotNull(Inventory.create(new InventoryId("2"), "name"));
+        assertNotNull(Inventory.create("12345", "name"));
     }
 
 }
