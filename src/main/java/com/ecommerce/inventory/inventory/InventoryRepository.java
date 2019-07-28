@@ -2,6 +2,8 @@ package com.ecommerce.inventory.inventory;
 
 import com.ecommerce.common.event.DomainEventAwareRepository;
 import com.ecommerce.common.utils.DefaultObjectMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -26,5 +28,19 @@ public class InventoryRepository extends DomainEventAwareRepository<Inventory> {
                 "ON DUPLICATE KEY UPDATE JSON_CONTENT=:json;";
         Map<String, String> paramMap = of("id", inventory.getId().toString(), "json", objectMapper.writeValueAsString(inventory));
         jdbcTemplate.update(sql, paramMap);
+    }
+
+
+    public Inventory byId(InventoryId id) {
+        try {
+            String sql = "SELECT JSON_CONTENT FROM INVENTORY WHERE ID=:id;";
+            return jdbcTemplate.queryForObject(sql, of("id", id.toString()), mapper());
+        } catch (EmptyResultDataAccessException e) {
+            throw new InventoryNotFoundException(id);
+        }
+    }
+
+    private RowMapper<Inventory> mapper() {
+        return (rs, rowNum) -> objectMapper.readValue(rs.getString("JSON_CONTENT"), Inventory.class);
     }
 }

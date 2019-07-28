@@ -6,19 +6,21 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
-public class InventoryEventHandler {
+public class InventoryApplicationService {
     private static final Logger logger = AutoNamingLoggerFactory.getLogger();
 
     private InventoryRepository repository;
 
-    public InventoryEventHandler(InventoryRepository repository) {
+    public InventoryApplicationService(InventoryRepository repository) {
         this.repository = repository;
     }
 
     @Transactional
-    public void createInventory(String productId, String productName) {
-        Inventory inventory = Inventory.create(productId, productName);
+    public InventoryId increase(String inventoryId, IncreaseInventoryCommand command) {
+        Inventory inventory = repository.byId(InventoryId.of(inventoryId));
+        inventory.increase(command.getIncreaseNumber());
         repository.save(inventory);
-        logger.info("Created inventory[{}] for product[{}].", inventory.getId(), productId);
+        logger.info("Increased inventory[{}] by {}.", inventoryId, command.getIncreaseNumber());
+        return inventory.getId();
     }
 }
