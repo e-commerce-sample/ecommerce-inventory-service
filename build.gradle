@@ -18,13 +18,13 @@ plugins {
 
 repositories {
     maven { url "https://maven.aliyun.com/repository/central" }
-    maven { url "http://localhost:9091/repository/maven-snapshots/" }
+    maven { url "https://mymavenrepo.com/repo/2w5k9sU2AsKfaYehyqno/" }
 
 }
 
 application {
     mainClassName = "com.ecommerce.Application"
-    applicationDefaultJvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"]
+    applicationDefaultJvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5007"]
 }
 
 sourceCompatibility = 1.8
@@ -36,7 +36,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    implementation("com.ecommerce:common:0.1-SNAPSHOT")
+    implementation("com.ecommerce:ecommerce-common:0.14-SNAPSHOT")
 
     //common dependencies
     implementation("mysql:mysql-connector-java:8.0.15")

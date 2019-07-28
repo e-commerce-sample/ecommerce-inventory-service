@@ -15,4 +15,14 @@ spring:
     virtual-host: /
     username: rabbitmq-user
     password: rabbitmq-password
-    publisher-confirms: true
+
+
+ecommerce:
+  rabbit:
+    publishX: inventory-publish-x
+    publishDlx: inventory-publish-dlx
+    publishDlq: inventory-publish-dlq
+    receiveQ: inventory-receive-q
+    receiveDlx: inventory-receive-dlx
+    receiveDlq: inventory-receive-dlq
+    receiveRecoverX: inventory-receive-recover-x
