@@ -9,4 +9,8 @@ public class InventoryNotFoundException extends AppException {
     public InventoryNotFoundException(InventoryId id) {
         super(INVENTORY_NOT_FOUND, ImmutableMap.of("invetoryId", id.toString()));
     }
+
+    public InventoryNotFoundException(String productId) {
+        super(INVENTORY_NOT_FOUND, ImmutableMap.of("productId", productId));
+    }
 }

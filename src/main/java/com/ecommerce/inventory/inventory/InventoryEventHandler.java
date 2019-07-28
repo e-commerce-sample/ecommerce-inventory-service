@@ -21,4 +21,12 @@ public class InventoryEventHandler {
         repository.save(inventory);
         logger.info("Created inventory[{}] for product[{}].", inventory.getId(), productId);
     }
+
+    @Transactional
+    public void updateProductName(String productId, String newName) {
+        Inventory inventory = repository.byProductId(productId);
+        inventory.updateProductName(newName);
+        repository.save(inventory);
+        logger.info("Inventory[{}] product[{}] name updated due to product change.", inventory.getId(), productId);
+    }
 }

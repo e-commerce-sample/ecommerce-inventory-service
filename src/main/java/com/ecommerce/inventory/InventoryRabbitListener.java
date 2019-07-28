@@ -30,6 +30,7 @@ public class InventoryRabbitListener {
 
     @RabbitHandler
     public void on(ProductNameUpdatedEvent event) {
+        eventHandler.updateProductName(event.getProductId(), event.getNewName());
     }
 
     @RabbitHandler

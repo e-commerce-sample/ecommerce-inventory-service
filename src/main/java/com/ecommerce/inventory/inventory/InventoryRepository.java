@@ -43,4 +43,13 @@ public class InventoryRepository extends DomainEventAwareRepository<Inventory> {
     private RowMapper<Inventory> mapper() {
         return (rs, rowNum) -> objectMapper.readValue(rs.getString("JSON_CONTENT"), Inventory.class);
     }
+
+    public Inventory byProductId(String productId) {
+        try {
+            String sql = "SELECT JSON_CONTENT FROM INVENTORY WHERE PRODUCT_ID=:productId;";
+            return jdbcTemplate.queryForObject(sql, of("productId", productId), mapper());
+        } catch (EmptyResultDataAccessException e) {
+            throw new InventoryNotFoundException(productId);
+        }
+    }
 }

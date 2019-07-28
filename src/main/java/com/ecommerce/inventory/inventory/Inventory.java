@@ -37,6 +37,10 @@ public class Inventory extends DomainEventAwareAggregate {
         raiseEvent(new InventoryChangedEvent(productId, remains));
     }
 
+    public void updateProductName(String newName) {
+        this.productName = newName;
+    }
+
     public InventoryId getId() {
         return id;
     }
