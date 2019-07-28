@@ -8,21 +8,22 @@ import java.time.Instant;
 public class Inventory extends DomainEventAwareAggregate {
     private InventoryId id;
     private String productId;
-    private String name;
+    private String productName;
     private int remains;
     private Instant createdAt;
 
     private Inventory() {
     }
 
-    private Inventory(InventoryId id, String name) {
-        this.id = id;
-        this.name = name;
-        this.remains = 100;
+    private Inventory(String productId, String productName) {
+        this.id = InventoryId.newId();
+        this.productId = productId;
+        this.productName = productName;
+        this.remains = 0;
         this.createdAt = Instant.now();
     }
 
-    public static Inventory create(InventoryId productId, String name) {
+    public static Inventory create(String productId, String name) {
         return new Inventory(productId, name);
     }
 
@@ -31,12 +32,17 @@ public class Inventory extends DomainEventAwareAggregate {
         raiseEvent(new InventoryChangedEvent(productId, remains));
     }
 
+    public void increase(int number) {
+        this.remains = this.remains + number;
+        raiseEvent(new InventoryChangedEvent(productId, remains));
+    }
+
     public InventoryId getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
     public int getRemains() {
