@@ -35,7 +35,7 @@ public class InventoryRabbitListener {
 
     @RabbitHandler
     public void on(OrderCreatedEvent event) {
+        eventHandler.decrease(event.getOrderId(), event.getItems());
     }
-
 
 }

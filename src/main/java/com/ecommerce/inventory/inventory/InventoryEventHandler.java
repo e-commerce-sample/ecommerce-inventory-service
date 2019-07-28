@@ -1,9 +1,12 @@
 package com.ecommerce.inventory.inventory;
 
+import com.ecommerce.common.event.order.OrderItem;
 import com.ecommerce.common.logging.AutoNamingLoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Component
 public class InventoryEventHandler {
@@ -28,5 +31,16 @@ public class InventoryEventHandler {
         inventory.updateProductName(newName);
         repository.save(inventory);
         logger.info("Inventory[{}] product[{}] name updated due to product change.", inventory.getId(), productId);
+    }
+
+    @Transactional
+    public void decrease(String orderId, List<OrderItem> orderItems) {
+        orderItems.forEach(orderItem -> {
+            Inventory inventory = repository.byProductId(orderItem.getProductId());
+            inventory.decrease(orderItem.getCount());
+            repository.save(inventory);
+            logger.info("Inventory[{}] decreased to {} due to order[{}] creation.",
+                    inventory.getId(), inventory.getRemains(), orderId);
+        });
     }
 }
