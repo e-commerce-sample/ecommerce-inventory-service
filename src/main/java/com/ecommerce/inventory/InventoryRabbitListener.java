@@ -4,18 +4,13 @@ import com.ecommerce.common.event.consume.EcommerceRabbitListener;
 import com.ecommerce.common.event.order.OrderCreatedEvent;
 import com.ecommerce.common.event.product.ProductCreatedEvent;
 import com.ecommerce.common.event.product.ProductNameUpdatedEvent;
-import com.ecommerce.common.logging.AutoNamingLoggerFactory;
 import com.ecommerce.inventory.inventory.InventoryEventHandler;
-import org.slf4j.Logger;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.stereotype.Component;
 
 @Component
 @EcommerceRabbitListener
 public class InventoryRabbitListener {
-    private static final Logger logger = AutoNamingLoggerFactory.getLogger();
-
-
     private InventoryEventHandler eventHandler;
 
     public InventoryRabbitListener(InventoryEventHandler eventHandler) {
