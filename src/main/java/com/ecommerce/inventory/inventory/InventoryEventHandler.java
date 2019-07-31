@@ -1,6 +1,8 @@
 package com.ecommerce.inventory.inventory;
 
+import com.ecommerce.common.event.order.OrderCreatedEvent;
 import com.ecommerce.common.event.order.OrderItem;
+import com.ecommerce.common.event.product.ProductNameUpdatedEvent;
 import com.ecommerce.common.logging.AutoNamingLoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
@@ -26,21 +28,22 @@ public class InventoryEventHandler {
     }
 
     @Transactional
-    public void updateProductName(String productId, String newName) {
-        Inventory inventory = repository.byProductId(productId);
-        inventory.updateProductName(newName);
+    public void updateProductName(ProductNameUpdatedEvent event) {
+        Inventory inventory = repository.byProductId(event.getProductId());
+        inventory.updateProductName(event.getNewName());
         repository.save(inventory);
-        logger.info("Inventory[{}] product[{}] name updated due to product change.", inventory.getId(), productId);
+        logger.info("Inventory[{}] product[{}] name updated due to product change.", inventory.getId(), event.getProductId());
     }
 
     @Transactional
-    public void decrease(String orderId, List<OrderItem> orderItems) {
+    public void decrease(OrderCreatedEvent event) {
+        List<OrderItem> orderItems = event.getItems();
         orderItems.forEach(orderItem -> {
             Inventory inventory = repository.byProductId(orderItem.getProductId());
             inventory.decrease(orderItem.getCount());
             repository.save(inventory);
             logger.info("Inventory[{}] decreased to {} due to order[{}] creation.",
-                    inventory.getId(), inventory.getRemains(), orderId);
+                    inventory.getId(), inventory.getRemains(), event.getOrderId());
         });
     }
 }

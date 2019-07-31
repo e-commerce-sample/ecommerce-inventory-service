@@ -25,12 +25,12 @@ public class InventoryRabbitListener {
 
     @RabbitHandler
     public void on(ProductNameUpdatedEvent event) {
-        eventHandler.updateProductName(event.getProductId(), event.getNewName());
+        eventHandler.updateProductName(event);
     }
 
     @RabbitHandler
     public void on(OrderCreatedEvent event) {
-        eventHandler.decrease(event.getOrderId(), event.getItems());
+        eventHandler.decrease(event);
     }
 
 }
