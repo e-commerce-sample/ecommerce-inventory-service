@@ -68,6 +68,9 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation('org.junit.jupiter:junit-jupiter-engine')
     testImplementation('org.mockito:mockito-junit-jupiter:2.26.0')
+
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
 }
 
 

@@ -2,18 +2,19 @@ package com.ecommerce.inventory.inventory;
 
 import com.ecommerce.common.event.DomainEventAwareAggregate;
 import com.ecommerce.common.event.inventory.InventoryChangedEvent;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
+import static lombok.AccessLevel.PRIVATE;
+
+@NoArgsConstructor(access = PRIVATE)
 public class Inventory extends DomainEventAwareAggregate {
     private InventoryId id;
     private String productId;
     private String productName;
     private int remains;
     private Instant createdAt;
-
-    private Inventory() {
-    }
 
     private Inventory(String productId, String productName) {
         this.id = InventoryId.newId();
