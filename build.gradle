@@ -38,6 +38,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-aop")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("com.ecommerce:ecommerce-common:0.33-SNAPSHOT")
+    implementation("com.ecommerce:ecommerce-order-api:0.01-SNAPSHOT")
 
     //common dependencies
     implementation("mysql:mysql-connector-java:8.0.15")
