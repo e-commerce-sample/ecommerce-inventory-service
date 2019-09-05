@@ -1,0 +1,2 @@
+rootProject.name = 'ecommerce-inventory-service'
+include 'ecommerce-inventory-service-api','ecommerce-inventory-service-sdk'
