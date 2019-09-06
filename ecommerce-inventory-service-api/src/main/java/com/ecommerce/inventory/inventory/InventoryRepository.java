@@ -34,10 +34,10 @@ public class InventoryRepository extends BaseRepository<Inventory> {
     }
 
 
-    public Inventory byId(InventoryId id) {
+    public Inventory byId(String id) {
         try {
             String sql = "SELECT JSON_CONTENT FROM INVENTORY WHERE ID=:id;";
-            return jdbcTemplate.queryForObject(sql, of("id", id.toString()), mapper());
+            return jdbcTemplate.queryForObject(sql, of("id", id), mapper());
         } catch (EmptyResultDataAccessException e) {
             throw new InventoryNotFoundException(id);
         }
@@ -52,7 +52,7 @@ public class InventoryRepository extends BaseRepository<Inventory> {
             String sql = "SELECT JSON_CONTENT FROM INVENTORY WHERE PRODUCT_ID=:productId;";
             return jdbcTemplate.queryForObject(sql, of("productId", productId), mapper());
         } catch (EmptyResultDataAccessException e) {
-            throw new InventoryNotFoundException(productId);
+            throw new InventoryNotFoundByProductException(productId);
         }
     }
 }

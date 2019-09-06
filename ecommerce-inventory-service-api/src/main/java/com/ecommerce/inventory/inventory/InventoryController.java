@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Map;
+
+import static com.google.common.collect.ImmutableMap.of;
 
 @RestController
 @RequestMapping(value = "/inventories")
@@ -19,8 +22,8 @@ public class InventoryController {
     }
 
     @PostMapping("/{id}/increase")
-    public InventoryId increaseInventory(@PathVariable("id") String inventoryId, @RequestBody @Valid IncreaseInventoryCommand command) {
-        return inventoryApplicationService.increase(inventoryId, command);
+    public Map<String, String> increaseInventory(@PathVariable("id") String inventoryId, @RequestBody @Valid IncreaseInventoryCommand command) {
+        return of("id", inventoryApplicationService.increase(inventoryId, command));
     }
 
 

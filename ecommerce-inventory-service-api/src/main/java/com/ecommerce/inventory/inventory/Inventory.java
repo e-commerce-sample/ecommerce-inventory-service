@@ -6,18 +6,19 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
+import static com.ecommerce.shared.utils.UuidGenerator.newUuid;
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
 public class Inventory extends BaseAggregate {
-    private InventoryId id;
+    private String id;
     private String productId;
     private String productName;
     private int remains;
     private Instant createdAt;
 
     private Inventory(String productId, String productName) {
-        this.id = InventoryId.newId();
+        this.id = newUuid();
         this.productId = productId;
         this.productName = productName;
         this.remains = 0;
@@ -42,7 +43,7 @@ public class Inventory extends BaseAggregate {
         this.productName = newName;
     }
 
-    public InventoryId getId() {
+    public String getId() {
         return id;
     }
 

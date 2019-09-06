@@ -4,7 +4,9 @@ package com.ecommerce.inventory;
 import com.ecommerce.shared.exception.ErrorCode;
 
 public enum InventoryErrorCode implements ErrorCode {
-    INVENTORY_NOT_FOUND(404, "没有找到产品库存项");
+    INVENTORY_NOT_FOUND(404, "没有找到库存项"),
+    INVENTORY_NOT_FOUND_BY_PRODUCT(404, "没有找到产品对应的库存项");
+
     private int status;
     private String message;
 

@@ -16,8 +16,8 @@ public class InventoryApplicationService {
     }
 
     @Transactional
-    public InventoryId increase(String inventoryId, IncreaseInventoryCommand command) {
-        Inventory inventory = repository.byId(InventoryId.of(inventoryId));
+    public String increase(String inventoryId, IncreaseInventoryCommand command) {
+        Inventory inventory = repository.byId(inventoryId);
         inventory.increase(command.getIncreaseNumber());
         repository.save(inventory);
         log.info("Increased inventory[{}] by {}.", inventoryId, command.getIncreaseNumber());
