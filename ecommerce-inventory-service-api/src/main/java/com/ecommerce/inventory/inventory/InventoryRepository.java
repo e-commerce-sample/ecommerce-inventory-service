@@ -1,6 +1,5 @@
 package com.ecommerce.inventory.inventory;
 
-import com.ecommerce.shared.event.DomainEventRecorder;
 import com.ecommerce.shared.jackson.DefaultObjectMapper;
 import com.ecommerce.shared.model.BaseRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,9 +17,7 @@ public class InventoryRepository extends BaseRepository<Inventory> {
     private final DefaultObjectMapper objectMapper;
 
     public InventoryRepository(NamedParameterJdbcTemplate jdbcTemplate,
-                               DefaultObjectMapper objectMapper,
-                               DomainEventRecorder eventRecorder) {
-        super(eventRecorder);
+                               DefaultObjectMapper objectMapper) {
         this.jdbcTemplate = jdbcTemplate;
         this.objectMapper = objectMapper;
     }
