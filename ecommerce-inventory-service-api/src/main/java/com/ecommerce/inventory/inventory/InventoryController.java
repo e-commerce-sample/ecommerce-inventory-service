@@ -1,6 +1,8 @@
 package com.ecommerce.inventory.inventory;
 
-import com.ecommerce.inventory.command.inventory.IncreaseInventoryCommand;
+import com.ecommerce.inventory.sdk.command.inventory.IncreaseInventoryCommand;
+import com.ecommerce.inventory.sdk.representation.inventory.InventoryRepresentation;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,5 +28,10 @@ public class InventoryController {
         return of("id", inventoryApplicationService.increase(inventoryId, command));
     }
 
+
+    @GetMapping("/{id}")
+    public InventoryRepresentation byId(@PathVariable("id") String inventoryId) {
+        return inventoryApplicationService.byId(inventoryId);
+    }
 
 }

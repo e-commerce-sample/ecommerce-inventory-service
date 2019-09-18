@@ -1,8 +1,8 @@
 package com.ecommerce.inventory.inventory;
 
-import com.ecommerce.order.event.order.OrderCreatedEvent;
-import com.ecommerce.order.event.order.OrderItem;
-import com.ecommerce.product.event.product.ProductNameUpdatedEvent;
+import com.ecommerce.order.sdk.event.order.OrderCreatedEvent;
+import com.ecommerce.order.sdk.event.order.OrderItem;
+import com.ecommerce.product.sdk.event.product.ProductNameUpdatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

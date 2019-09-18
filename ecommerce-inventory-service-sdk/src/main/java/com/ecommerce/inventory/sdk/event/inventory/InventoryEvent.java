@@ -1,4 +1,4 @@
-package com.ecommerce.inventory.event.inventory;
+package com.ecommerce.inventory.sdk.event.inventory;
 
 import com.ecommerce.shared.event.DomainEvent;
 import lombok.Getter;

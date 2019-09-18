@@ -1,8 +1,8 @@
 package com.ecommerce.inventory;
 
-import com.ecommerce.order.event.order.OrderCreatedEvent;
-import com.ecommerce.product.event.product.ProductCreatedEvent;
-import com.ecommerce.product.event.product.ProductNameUpdatedEvent;
+import com.ecommerce.order.sdk.event.order.OrderCreatedEvent;
+import com.ecommerce.product.sdk.event.product.ProductCreatedEvent;
+import com.ecommerce.product.sdk.event.product.ProductNameUpdatedEvent;
 import com.ecommerce.spring.common.event.messaging.rabbit.EcommerceRabbitProperties;
 import com.google.common.collect.ImmutableMap;
 import org.springframework.amqp.core.Binding;

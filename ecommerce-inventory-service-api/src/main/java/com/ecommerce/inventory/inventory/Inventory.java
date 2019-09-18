@@ -1,15 +1,17 @@
 package com.ecommerce.inventory.inventory;
 
-import com.ecommerce.inventory.event.inventory.InventoryChangedEvent;
+import com.ecommerce.inventory.sdk.event.inventory.InventoryChangedEvent;
+import com.ecommerce.inventory.sdk.representation.inventory.InventoryRepresentation;
 import com.ecommerce.shared.model.BaseAggregate;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.Instant;
 
 import static com.ecommerce.shared.utils.UuidGenerator.newUuid;
-import static lombok.AccessLevel.PRIVATE;
 
-@NoArgsConstructor(access = PRIVATE)
+@Getter
+@Builder
 public class Inventory extends BaseAggregate {
     private String id;
     private String productId;
@@ -17,16 +19,14 @@ public class Inventory extends BaseAggregate {
     private int remains;
     private Instant createdAt;
 
-    private Inventory(String productId, String productName) {
-        this.id = newUuid();
-        this.productId = productId;
-        this.productName = productName;
-        this.remains = 0;
-        this.createdAt = Instant.now();
-    }
-
-    public static Inventory create(String productId, String name) {
-        return new Inventory(productId, name);
+    public static Inventory create(String productId, String productName) {
+        return Inventory.builder()
+                .id(newUuid())
+                .productId(productId)
+                .productName(productName)
+                .remains(0)
+                .createdAt(Instant.now())
+                .build();
     }
 
     public void decrease(int number) {
@@ -43,19 +43,10 @@ public class Inventory extends BaseAggregate {
         this.productName = newName;
     }
 
-    public String getId() {
-        return id;
+    public InventoryRepresentation toRepresentation() {
+        return new InventoryRepresentation(this.id,
+                this.productName,
+                this.remains);
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
-    public int getRemains() {
-        return remains;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
 }

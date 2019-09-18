@@ -1,6 +1,7 @@
 package com.ecommerce.inventory.inventory;
 
-import com.ecommerce.inventory.command.inventory.IncreaseInventoryCommand;
+import com.ecommerce.inventory.sdk.command.inventory.IncreaseInventoryCommand;
+import com.ecommerce.inventory.sdk.representation.inventory.InventoryRepresentation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,5 +23,11 @@ public class InventoryApplicationService {
         repository.save(inventory);
         log.info("Increased inventory[{}] by {}.", inventoryId, command.getIncreaseNumber());
         return inventory.getId();
+    }
+
+    public InventoryRepresentation byId(String inventoryId) {
+        return repository
+                .byId(inventoryId)
+                .toRepresentation();
     }
 }
