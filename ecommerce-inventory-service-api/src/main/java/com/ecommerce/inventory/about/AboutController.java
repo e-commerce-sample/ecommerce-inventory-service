@@ -1,5 +1,6 @@
 package com.ecommerce.inventory.about;
 
+import com.ecommerce.inventory.sdk.representation.about.AboutRepresentation;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

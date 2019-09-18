@@ -26,7 +26,7 @@ public class InventoryRepository extends BaseRepository<Inventory> {
     protected void doSave(Inventory inventory) {
         String sql = "INSERT INTO INVENTORY (ID, JSON_CONTENT) VALUES (:id, :json) " +
                 "ON DUPLICATE KEY UPDATE JSON_CONTENT=:json;";
-        Map<String, String> paramMap = of("id", inventory.getId().toString(), "json", objectMapper.writeValueAsString(inventory));
+        Map<String, String> paramMap = of("id", inventory.getId(), "json", objectMapper.writeValueAsString(inventory));
         jdbcTemplate.update(sql, paramMap);
     }
 
